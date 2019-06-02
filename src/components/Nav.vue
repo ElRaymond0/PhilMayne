@@ -46,7 +46,6 @@
         height: 0;
         opacity: 0;
         padding: 20px;
-        transition: opacity 0.3s cubic-bezier(0, 0.46, 0.01, 0.93);
         @media screen and (min-width: $tablet) {
             height: 70px;
             background: none;
