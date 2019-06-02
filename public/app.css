@@ -1,0 +1,4 @@
+nav{height:0;margin-top:-150px;transition:all 0.2s ease-in}nav ul{margin:0;padding:0}nav ul li{color:#fff;padding:0;list-style:none}.mobNav{position:absolute;right:0;top:0;height:20px;width:30px;padding:20px}@media screen and (min-width: 1250px){.mobNav{cursor:pointer}}.mobNav__elem{background-color:#fff;width:30px;height:2px;display:block;margin-bottom:5px}
+
+body{background:linear-gradient(#010925, #000);font-family:'Open Sans', sans-serif;font-weight:300;margin:0;height:100vh}header{position:absolute;width:100%;height:70px}.photo__container{display:none;border-radius:50%;overflow:hidden;height:70px;width:70px;margin-top:20px;margin-left:20px;text-align:center;border:5px solid #fff}
+

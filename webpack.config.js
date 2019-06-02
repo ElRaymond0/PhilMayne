@@ -1,5 +1,6 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = env => {
     return {
@@ -9,25 +10,44 @@ module.exports = env => {
         },
         output: {
             filename: '[name].js',
-            path: path.resolve(__dirname, 'src')
+            path: path.resolve(__dirname, 'public')
         },
         module: {
             rules: [
                 {
-                    test: /\.(c|sa)ss$/i,
+                    test: /\.(c|sc)ss$/i,
                     use: [
-                        "css-loader",
-                        "sass-loader"
+                        {
+                            loader: MiniCssExtractPlugin.loader,
+                        },
+                        {
+                            loader: "css-loader"
+                        },
+                        {
+                            loader: "sass-loader"
+                        }
                     ]
                 },
                 {
                     test: /\.vue$/,
                     loader: 'vue-loader'
+                },
+                {
+                    test: /\.(png|jpe?g|gif)$/,
+                    use: [
+                        {
+                            loader: 'file-loader?name=/[name].[ext]'
+                        }
+                    ]
                 }
             ]
         },
         plugins: [
-            new VueLoaderPlugin()
+            new VueLoaderPlugin(),
+            new MiniCssExtractPlugin({
+                filename: '[name].css',
+                chunkFilename: '[id].css',
+              }),
         ]
     }
 };
