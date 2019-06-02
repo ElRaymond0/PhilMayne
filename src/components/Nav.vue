@@ -56,20 +56,20 @@
         ul {
             margin: 0;
             padding: 0;
+            margin-bottom: -150px;
+            @media screen and (min-width: $tablet) {
+                margin-bottom: 0;
+            }
                 
             li {
                 padding: 0;
+                opacity: 0;
                 list-style: none;
                 text-align: left;
                 margin-bottom: -30px;
                 font-size: 1.3rem;
-                transition: margin-bottom 0.5s ease, opacity 0.8s ease;
-                @for $i from 1 through 3 {
-                    &:nth-child(#{$i}) { 
-                    transition-delay: (0.1s * $i); 
-                    }
-                }
                 @media screen and (min-width: $tablet) {
+                    opacity: 1;
                     display: inline-block;
                     margin: 0 1rem;
                 }
@@ -91,9 +91,15 @@
         height: 100vh;
         transition: opacity 0.3s cubic-bezier(0.93, 0.24, 0.98, 0.85);
 
+        ul {
+            margin-bottom: 0;
+            transition: all 0.2s ease;
+        }
+
         li {
+            opacity: 1;
             margin-bottom: 1rem;
-            transition: margin-bottom 0.5s ease, opacity 0.8s ease;
+            transition: margin-bottom 0.5s ease;
             @for $i from 1 through 3 {
                 &:nth-child(#{$i}) { 
                 transition-delay: (0.1s * $i); 
