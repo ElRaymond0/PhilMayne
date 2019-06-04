@@ -3,13 +3,13 @@
         <nav :class="{ 'nav__open': isNavOpen }">
             <ul>
                 <li>
-                    <a href="#">About</a>
+                    <a href="#" @click="updateNav('Phil Mayne', 'About', '')">About</a>
                 </li>
                 <li>
-                    <a href="#">Skills</a>
+                    <a href="#" @click="updateNav('Skills', 'UX Developer', '')">Skills</a>
                 </li>
                 <li>
-                    <a href="#">Experience</a>
+                    <a href="#" @click="updateNav('Experience', 'Work and projects', '')">Experience</a>
                 </li>
             </ul>
         </nav>
@@ -29,8 +29,14 @@
             }
         },
         methods: {
+            updateNav(title, subTitle, body) {
+                this.isNavOpen = false;
+                this.$emit('setCardInfo', { title: title, subTitle: subTitle, body: body });
+                this.$emit('navToggled', this.isNavOpen);
+            },
             toggleNav() {
                 this.isNavOpen = !this.isNavOpen;
+                this.$emit('navToggled', this.isNavOpen);
             }
         }
     }
@@ -42,7 +48,7 @@
         display: flex;
         align-items: flex-end;
         justify-content: flex-start;
-        background: linear-gradient( #1e1e1f, #19213e);
+        background: linear-gradient( $brown, $altBlue);
         height: 0;
         opacity: 0;
         padding: 20px;
@@ -71,6 +77,7 @@
                     opacity: 1;
                     display: inline-block;
                     margin: 0 1rem;
+                    font-size: 1rem;
                 }
 
                 a {
@@ -86,9 +93,13 @@
     }
 
     .nav__open {
-        opacity: 0.8;
+        opacity: 0.9;
         height: 100vh;
         transition: opacity 0.3s cubic-bezier(0.93, 0.24, 0.98, 0.85);
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: 3;
 
         ul {
             margin-bottom: 0;
@@ -114,6 +125,7 @@
         height: 20px;
         width: 30px;
         padding: 20px;
+        z-index: 3;
         @media screen and (min-width: $tablet) {
             display: none;
         }
