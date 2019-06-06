@@ -12,7 +12,7 @@ module.exports = env => {
             filename: '[name].js',
             path: path.resolve(__dirname, 'public'),
             publicPath: process.env.NODE_ENV === 'production' 
-            ? '/PhilMayne/'
+            ? '/dist/'
             : '/'
         },
         module: {
