@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "webpack --env.NODE_ENV=production --p && vue-cli-service serve",
+    "serve": "webpack --env.NODE_ENV=development --p && vue-cli-service serve",
     "build": "webpack --env.NODE_ENV=production --progress && vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
