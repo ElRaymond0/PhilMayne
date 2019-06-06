@@ -3,13 +3,13 @@
         <nav :class="{ 'nav__open': isNavOpen }">
             <ul>
                 <li>
-                    <a href="#" @click="updateNav('Phil Mayne', 'About', '')">About</a>
+                    <a href="#" @click="updateNav('About')">About</a>
                 </li>
                 <li>
-                    <a href="#" @click="updateNav('Skills', 'UX Developer', '')">Skills</a>
+                    <a href="#" @click="updateNav('Skills')">Skills</a>
                 </li>
                 <li>
-                    <a href="#" @click="updateNav('Experience', 'Work and projects', '')">Experience</a>
+                    <a href="#" @click="updateNav('Experience')">Experience</a>
                 </li>
             </ul>
         </nav>
@@ -29,9 +29,9 @@
             }
         },
         methods: {
-            updateNav(title, subTitle, body) {
+            updateNav(nav) {
                 this.isNavOpen = false;
-                this.$emit('setCardInfo', { title: title, subTitle: subTitle, body: body });
+                this.$emit('setCardInfo', nav);
                 this.$emit('navToggled', this.isNavOpen);
             },
             toggleNav() {
@@ -149,7 +149,7 @@
         }
 
         &__elem {
-            background-color: $white;
+            background-color: $yellow;
             width: 30px;
             height: 2px;
             display: block;

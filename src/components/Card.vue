@@ -7,25 +7,15 @@
             <h1>
                 {{ cardInfo.title }}
             </h1>
-            <p>
-                {{ cardInfo.subTitle }}
+            <p v-html="cardInfo.subTitle">
             </p>
             <hr />
         </div>
         <div class="card__body">
-            <div class="card__text">
-                {{ cardInfo.body }}
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris gravida nec diam eget sagittis. 
-                    Vivamus turpis nisi, tempus ut suscipit pellentesque, tristique volutpat lectus. 
-                    Aliquam pellentesque dignissim ligula quis ultrices.
-                </p>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris gravida nec diam eget sagittis. 
-                    Vivamus turpis nisi, tempus ut suscipit pellentesque, tristique volutpat lectus. 
-                    Aliquam pellentesque dignissim ligula quis ultrices.
-                </p>
+            <div class="card__text" v-html="cardInfo.body">
             </div>
             <div class="card__body-image">
-                <img src="https://images.pexels.com/photos/1391374/pexels-photo-1391374.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                <img src="https://images.pexels.com/photos/1391374/pexels-photo-1391374.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" />
             </div>
         </div>
     </section>
@@ -66,9 +56,9 @@
             position: absolute;
             height: 150px;
             width: 5px;
-            background-color: $white;
+            background-color: $yellow;
             top: -170px;
-            left: 50px;
+            left: 52px;
         }
 
         &--focused {
@@ -85,7 +75,7 @@
             overflow: hidden;
             border-radius: 50%;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             position: absolute;
             left: 20px;
@@ -94,7 +84,7 @@
             z-index: 2;
 
             img {
-                width: 90px;
+                width: 80px;
             }
         }
 
@@ -104,9 +94,10 @@
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
             background-color: lighten($darkBlue, 5%);
-            background-image: url(https://images.pexels.com/photos/1391374/pexels-photo-1391374.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+            background-image: url('https://images.pexels.com/photos/1391374/pexels-photo-1391374.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
             background-size: cover;
             position: relative;
+            z-index: 1;
 
             &::after {
                 content: '';
@@ -139,8 +130,10 @@
                 @media screen and (min-width: $tablet) {
                     display: block;
                     max-width: 50px;
-                    margin: 30px 0 0 0;
-                    opacity: 0.5;
+                    margin: 15px 0 0 0;
+                    opacity: 1;
+                    border-color: $yellow;
+                    border-style: solid;
                 }
             }
 
@@ -191,14 +184,25 @@
 
         &__text {
             padding: 0;
+            line-height: 1.8rem;
+            
             @media screen and (min-width: $tablet) {
                 background-color: $white;
                 box-shadow: 0 5px 5px rgba(0,0,0,0.1);
                 border-bottom-right-radius: 5px;
                 border-bottom-left-radius: 5px;
                 padding: 20px;
+                padding-right: 30px;
                 max-width: 400px;
                 position: relative;
+                font-size: 0.9rem;
+                z-index: 1;
+            }
+
+            strong {
+                + p {
+                    margin-top: 0;
+                }
             }
         }
     }

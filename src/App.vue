@@ -29,6 +29,7 @@
 <script>
 import Nav from './components/Nav.vue';
 import Card from './components/Card.vue';
+import axios from 'axios';
   export default {
     components: {
       Nav,
@@ -41,13 +42,38 @@ import Card from './components/Card.vue';
           subTitle: 'CV',
           body: ''
         },
+        about: {},
+        skills: {},
+        experience: {},
         navState: false
       }
     },
     methods: {
       setInfo(data) {
-        Object.keys(data).forEach((info) => this.cardInfo[info] = data[info])
+        switch(data) {
+          case 'About':
+            Object.keys(this.about).forEach((info) => this.cardInfo[info] = this.about[info]);
+            break;
+          case 'Skills':
+            Object.keys(this.skills).forEach((info) => this.cardInfo[info] = this.skills[info]);
+            break;
+          case 'Experience':
+            Object.keys(this.experience).forEach((info) => this.cardInfo[info] = this.experience[info]);
+            break;
+          default: 
+            Object.keys(this.about).forEach((info) => this.cardInfo[info] = this.about[info]);
+        }
+        
       }
+    },
+    beforeCreate() {
+      axios.get('/data.json')
+              .then((response) => {
+                this.about = response.data.about;
+                this.skills = response.data.skills;
+                this.experience = response.data.experience;
+                Object.keys(this.about).forEach((info) => this.cardInfo[info] = this.about[info]);
+              })
     }
   }
 </script>
@@ -89,7 +115,7 @@ import Card from './components/Card.vue';
       position: relative;
     }
     &__background {
-      background: linear-gradient($darkBlue, $black);
+      background-color: $darkBrown;
       height: 400px;
       position: absolute;
       top: -40px;
@@ -98,7 +124,8 @@ import Card from './components/Card.vue';
       transform: rotate(-5deg);
 
       @media screen and (min-width: $tablet) {
-        height: 200px;
+        height: 300px;
+        margin-top: -60px;
       }
     }
   }
@@ -116,6 +143,11 @@ import Card from './components/Card.vue';
 
   main {
     margin: 20px;
+
+    @media screen and (min-width: $desktop) {
+      max-width: 800px;
+      margin: 20px auto;
+    }
   }
 
   header {
