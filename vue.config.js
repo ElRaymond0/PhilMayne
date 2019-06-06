@@ -1,5 +1,7 @@
-module.exports = {
-    publicPath: process.env.NODE_ENV === 'production'
-      ? '/PhilMayne/'
-      : '/'
+module.exports = env => {
+    return {
+        publicPath: --env.NODE_ENV === 'production'
+        ? '/PhilMayne/'
+        : '/'
+    }
   }
