@@ -10,7 +10,8 @@ module.exports = {
         'app': path.resolve(__dirname, 'src/main.js')
     },
     output: {
-        filename: '[name].js'
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'public')
     },
     module: {
         rules: [
