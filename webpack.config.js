@@ -11,7 +11,9 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'public')
+        path: process.env.NODE_ENV === 'production'
+            ? path.resolve(__dirname, '/PhilMayne/public')
+            : '/'
     },
     module: {
         rules: [
