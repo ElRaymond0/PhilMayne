@@ -113,7 +113,7 @@
       opacity: 1;
       margin-bottom: 1rem;
       transition: margin-bottom 0.5s ease;
-      @for $i from 1 through 3 {
+      @for $i from 1 through 4 {
         &:nth-child(#{$i}) {
           transition-delay: (0.1s * $i);
         }
