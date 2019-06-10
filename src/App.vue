@@ -1,5 +1,5 @@
 <template>
-  <div class="app__container">
+  <div class="app__container" :class="{ 'app__container--nav': navState }">
     <span class="app__background"></span>
     <header>
       <Nav @setCardInfo="setInfo($event)" @navToggled="navState = $event"/>
@@ -23,6 +23,12 @@
           :navToggled="navState"
           :key="2"
           v-if="cardInfo.title === 'Experience'"
+        />
+        <Card
+          :cardInfo="cardInfo"
+          :navToggled="navState"
+          :key="3"
+          v-if="cardInfo.title === 'Contact'"
         />
       </transition>
     </main>
@@ -53,6 +59,7 @@
         about: {},
         skills: {},
         experience: {},
+        contact: {},
         navState: false
       };
     },
@@ -73,6 +80,9 @@
           case "Experience":
             this.filterInfo(this.experience);
             break;
+          case "Contact":
+            this.filterInfo(this.contact);
+            break;
           default:
             this.filterInfo(this.about);
         }
@@ -83,9 +93,8 @@
         this.about = response.data.about;
         this.skills = response.data.skills;
         this.experience = response.data.experience;
-        Object.keys(this.about).forEach(
-          info => (this.cardInfo[info] = this.about[info])
-        );
+        this.contact = response.data.contact;
+        this.filterInfo(this.about);
       });
     }
   };
@@ -132,6 +141,11 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
+
+      &--nav {
+        max-height: 100vh;
+        overflow: hidden;
+      }
     }
     &__background {
       background-color: $darkBrown;

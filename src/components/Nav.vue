@@ -11,6 +11,9 @@
         <li>
           <a href="#" @click="updateNav('Experience')">Experience</a>
         </li>
+        <li>
+          <a href="#" @click="updateNav('Contact')">Contact</a>
+        </li>
       </ul>
     </nav>
     <div class="mobNav" :class="{ 'mobNav__open': isNavOpen }" @click="toggleNav">
