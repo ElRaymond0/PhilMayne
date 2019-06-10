@@ -6,76 +6,89 @@
     </header>
     <main>
       <transition name="fade" mode="out-in">
-        <Card :cardInfo="cardInfo"
-              :navToggled="navState"
-              :key="0"
-              v-if="cardInfo.title === 'Phil Mayne'"
-              />
-        <Card :cardInfo="cardInfo"
-              :navToggled="navState"
-              :key="1"
-              v-if="cardInfo.title === 'Skills'"
-              />
-        <Card :cardInfo="cardInfo"
-              :navToggled="navState"
-              :key="2"
-              v-if="cardInfo.title === 'Experience'"
-              />
+        <Card
+          :cardInfo="cardInfo"
+          :navToggled="navState"
+          :key="0"
+          v-if="cardInfo.title === 'Phil Mayne'"
+        />
+        <Card
+          :cardInfo="cardInfo"
+          :navToggled="navState"
+          :key="1"
+          v-if="cardInfo.title === 'Skills'"
+        />
+        <Card
+          :cardInfo="cardInfo"
+          :navToggled="navState"
+          :key="2"
+          v-if="cardInfo.title === 'Experience'"
+        />
       </transition>
     </main>
   </div>
 </template>
 
 <script>
-import Nav from './components/Nav.vue';
-import Card from './components/Card.vue';
-import axios from 'axios';
+  import Nav from "./components/Nav.vue";
+  import Card from "./components/Card.vue";
+  import axios from "axios";
   export default {
     components: {
       Nav,
       Card
     },
+    computed: {
+      dataUrl() {
+        return process.env.NODE_ENV === "production" ? "/PhilMayne/" : "/";
+      }
+    },
     data() {
       return {
         cardInfo: {
-          title: 'Phil Mayne',
-          subTitle: 'CV',
-          body: ''
+          title: "Phil Mayne",
+          subTitle: "CV",
+          body: ""
         },
         about: {},
         skills: {},
         experience: {},
         navState: false
-      }
+      };
     },
     methods: {
+      filterInfo(variable) {
+        Object.keys(variable).forEach(
+          info => (this.cardInfo[info] = variable[info])
+        );
+      },
       setInfo(data) {
-        switch(data) {
-          case 'About':
-            Object.keys(this.about).forEach((info) => this.cardInfo[info] = this.about[info]);
+        switch (data) {
+          case "About":
+            this.filterInfo(this.about);
             break;
-          case 'Skills':
-            Object.keys(this.skills).forEach((info) => this.cardInfo[info] = this.skills[info]);
+          case "Skills":
+            this.filterInfo(this.skills);
             break;
-          case 'Experience':
-            Object.keys(this.experience).forEach((info) => this.cardInfo[info] = this.experience[info]);
+          case "Experience":
+            this.filterInfo(this.experience);
             break;
-          default: 
-            Object.keys(this.about).forEach((info) => this.cardInfo[info] = this.about[info]);
+          default:
+            this.filterInfo(this.about);
         }
-        
       }
     },
-    beforeCreate() {
-      axios.get('/data.json')
-              .then((response) => {
-                this.about = response.data.about;
-                this.skills = response.data.skills;
-                this.experience = response.data.experience;
-                Object.keys(this.about).forEach((info) => this.cardInfo[info] = this.about[info]);
-              })
+    created() {
+      axios.get(`${this.dataUrl}data.json`).then(response => {
+        this.about = response.data.about;
+        this.skills = response.data.skills;
+        this.experience = response.data.experience;
+        Object.keys(this.about).forEach(
+          info => (this.cardInfo[info] = this.about[info])
+        );
+      });
     }
-  }
+  };
 </script>
 
 <style lang="scss">
@@ -84,28 +97,34 @@ import axios from 'axios';
   * {
     box-sizing: border-box;
   }
-  .fade-leave, .fade-enter-to {  
+  .fade-leave,
+  .fade-enter-to {
     opacity: 1;
-    div, &::before {
+    div,
+    &::before {
       margin-top: 0;
     }
   }
 
-  .fade-enter, .fade-leave-to {
+  .fade-enter,
+  .fade-leave-to {
     opacity: 0;
-    div, &::before {
+    div,
+    &::before {
       margin-top: -10px;
     }
   }
-  .fade-enter-active, .fade-leave-active {
+  .fade-enter-active,
+  .fade-leave-active {
     transition: all 0.5s cubic-bezier(0.06, 0.38, 0.25, 1);
-    div, &::before {
+    div,
+    &::before {
       transition: all 0.5s cubic-bezier(0.06, 0.38, 0.25, 1);
       @for $i from 1 through 3 {
-                &:nth-child(#{$i}) { 
-                transition-delay: (0.1s * $i); 
-                }
-            }
+        &:nth-child(#{$i}) {
+          transition-delay: (0.1s * $i);
+        }
+      }
     }
   }
   .app {
@@ -131,7 +150,7 @@ import axios from 'axios';
   }
 
   body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-weight: 300;
     font-size: 16px;
     margin: 0;
