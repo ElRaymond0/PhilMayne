@@ -210,6 +210,11 @@
         text-decoration: none;
         position: relative;
         display: inline-block;
+        padding: 0 5px;
+        background-color: lighten($yellow, 20%);
+        &:hover {
+          background-color: lighten($yellow, 5%);
+        }
 
         &::after {
           content: "";
@@ -218,7 +223,7 @@
           left: 0;
           right: 0;
           height: 2px;
-          background-color: $grey;
+          background-color: $yellow;
         }
       }
     }

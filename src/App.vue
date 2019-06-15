@@ -32,17 +32,20 @@
         />
       </transition>
     </main>
+    <Footer/>
   </div>
 </template>
 
 <script>
   import Nav from "./components/Nav.vue";
   import Card from "./components/Card.vue";
+  import Footer from "./components/Footer.vue";
   import axios from "axios";
   export default {
     components: {
       Nav,
-      Card
+      Card,
+      Footer
     },
     data() {
       return {
@@ -171,6 +174,7 @@
 
   main {
     margin: 20px;
+    min-height: 80vh;
 
     @media screen and (min-width: $desktop) {
       max-width: 800px;
