@@ -44,11 +44,6 @@
       Nav,
       Card
     },
-    computed: {
-      dataUrl() {
-        return process.env.NODE_ENV === "production" ? "/PhilMayne/" : "/";
-      }
-    },
     data() {
       return {
         cardInfo: {
@@ -89,7 +84,7 @@
       }
     },
     created() {
-      axios.get(`${this.dataUrl}data.json`).then(response => {
+      axios.get('/data.json').then(response => {
         this.about = response.data.about;
         this.skills = response.data.skills;
         this.experience = response.data.experience;
