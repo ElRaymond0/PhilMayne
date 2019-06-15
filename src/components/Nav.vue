@@ -61,6 +61,10 @@
       opacity: 1;
       justify-content: flex-end;
     }
+    @media screen and (min-width: $desktop) {
+      max-width: 850px;
+      margin: auto;
+    }
     ul {
       margin: 0;
       padding: 0;
